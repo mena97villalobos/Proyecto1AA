@@ -1,0 +1,17 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname=helvetica] ;
+edge [fontname=helvetica] ;
+0 [label="alcohol <= 10.525\ngini = 0.498\nsamples = 1279\nvalue = [595, 684]", fillcolor="#e5f2fc"] ;
+1 [label="sulphates <= 0.575\ngini = 0.467\nsamples = 779\nvalue = [489, 290]", fillcolor="#f4ccae"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="gini = 0.335\nsamples = 305\nvalue = [240, 65]", fillcolor="#eca36f"] ;
+1 -> 2 ;
+3 [label="gini = 0.499\nsamples = 474\nvalue = [249, 225]", fillcolor="#fcf3ec"] ;
+1 -> 3 ;
+4 [label="volatile acidity <= 0.87\ngini = 0.334\nsamples = 500\nvalue = [106, 394]", fillcolor="#6eb7ec"] ;
+0 -> 4 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+5 [label="gini = 0.299\nsamples = 475\nvalue = [87, 388]", fillcolor="#65b3eb"] ;
+4 -> 5 ;
+6 [label="gini = 0.365\nsamples = 25\nvalue = [19, 6]", fillcolor="#eda978"] ;
+4 -> 6 ;
+}
