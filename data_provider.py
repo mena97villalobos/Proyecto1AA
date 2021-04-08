@@ -28,6 +28,19 @@ def load_wine_quality_data_standard():
     labels_test_wq_standard = [int(i > 5) for i in wine_quality_test_standardize['quality'].values]
     return features_train_wq_standard, labels_train_wq_standard, features_test_wq_standard, labels_test_wq_standard
 
+def load_wine_quality_data_normal():
+    # Wine Quality dataset, normalize data
+
+    wine_quality_train_normalize = pd.read_csv('./train_data/winequality-train-normalize.csv')
+    feature_names = wine_quality_train_normalize.columns.values[1:-1]
+    features_train_wq_normal = wine_quality_train_normalize[feature_names]
+    labels_train_wq_normal = [int(i > 5) for i in wine_quality_train_normalize['quality'].values]
+
+    wine_quality_test_normalize = pd.read_csv('./test_data/winequality-test-normalize.csv')
+    features_test_wq_normal = wine_quality_test_normalize[feature_names]
+    labels_test_wq_normal = [int(i > 5) for i in wine_quality_test_normalize['quality'].values]
+    return features_train_wq_normal, labels_train_wq_normal, features_test_wq_normal, labels_test_wq_normal
+
 
 def load_spam_base_data():
     # Spam base dataset, raw data without preprocessing
@@ -56,12 +69,28 @@ def load_spam_base_data_standard():
     labels_test_sb_standard = spam_base_test_standardize['class'].values
     return features_train_sb_standard, labels_train_sb_standard, features_test_sb_standard, labels_test_sb_standard
 
+def load_spam_base_data_normal():
+    # Spam base dataset, normalize data
+
+    spam_base_train_normalize = pd.read_csv('./train_data/spambase-train-normalize.csv')
+    feature_names = spam_base_train_normalize.columns.values[1:-1]
+    features_train_sb_normal = spam_base_train_normalize[feature_names]
+    labels_train_sb_normal = spam_base_train_normalize['class'].values
+
+    spam_base_test_normalize = pd.read_csv('./test_data/spambase-test-normalize.csv')
+    features_test_sb_normal = spam_base_test_normalize[feature_names]
+    labels_test_sb_normal = spam_base_test_normalize['class'].values
+    return features_train_sb_normal, labels_train_sb_normal, features_test_sb_normal, labels_test_sb_normal
 
 def data():
     features_train_wq, labels_train_wq, features_test_wq, labels_test_wq = load_wine_quality_data()
     features_train_wq_standard, labels_train_wq_standard, features_test_wq_standard, labels_test_wq_standard = load_wine_quality_data_standard()
+    features_train_wq_normal, labels_train_wq_normal, features_test_wq_normal, labels_test_wq_normal = load_wine_quality_data_normal()
     features_train_sb, labels_train_sb, features_test_sb, labels_test_sb = load_spam_base_data()
     features_train_sb_standard, labels_train_sb_standard, features_test_sb_standard, labels_test_sb_standard = load_spam_base_data_standard()
+    features_train_sb_normal, labels_train_sb_normal, features_test_sb_normal, labels_test_sb_normal = load_spam_base_data_normal()
+    
+
     return [
         {
             'train': (features_train_wq, labels_train_wq),
@@ -82,5 +111,15 @@ def data():
             'train': (features_train_sb_standard, labels_train_sb_standard),
             'test': (features_test_sb_standard, labels_test_sb_standard),
             'label': 'Spam Base Standard'
+        },
+        {
+            'train': (features_train_wq_normal, labels_train_wq_normal),
+            'test': (features_test_wq_normal, labels_test_wq_normal),
+            'label': 'Wine Quality Normal'
+        },
+        {
+            'train': (features_train_sb_normal, labels_train_sb_normal),
+            'test': (features_test_sb_normal, labels_test_sb_normal),
+            'label': 'Spam Base Normal'
         },
     ]
